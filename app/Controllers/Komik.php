@@ -15,10 +15,16 @@ class Komik extends BaseController
 
   public function index()
   {
+    // page yang aktif
+    $currentPage = $this->request->getVar('page_komik') ? $this->request->getVar('page_komik') : 1;
+
     // $komik = $this->komikModel->findAll();
     $data = [
-      'title' => 'Daftar Komik',
-      'komik' => $this->komikModel->getKomik()
+      'title'       => 'Daftar Komik',
+      // 'komik' => $this->komikModel->getKomik()
+      'komik'       => $this->komikModel->paginate(3, 'komik'),    // set jumlah data yang ditampilkan per page (per halaman)
+      'pager'       => $this->komikModel->pager,
+      'currentPage' => $currentPage
     ];
 
     return view('komik/index', $data);
@@ -179,8 +185,10 @@ class Komik extends BaseController
       $namaFileSampulRandom = $fileSampul->getRandomName();
       // pindah file ke folder img di folder public
       $fileSampul->move('img', $namaFileSampulRandom);
-      // delete file lama
-      unlink('img/' . $oldSampul);
+      // delete file lama jika ada (bukan file default)
+      if(!($oldSampul == 'default.png')) {
+        unlink('img/' . $oldSampul);
+      }
     }
 
         

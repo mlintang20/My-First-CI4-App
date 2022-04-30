@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <?php $i = 1; ?>
+          <?php $i = 1 + (3 * ($currentPage - 1)); ?>
           <?php foreach($komik as $k) : ?>
             <tr>
               <th scope="row"><?= $i++; ?></th>
@@ -35,6 +35,8 @@
           <?php endforeach; ?>
         </tbody>
       </table>
+      <!-- untuk menghubungkan dan menampilkan semua page -->
+      <?= $pager->links('komik', 'komik_pagination'); ?>
     </div>
   </div>
 </div>

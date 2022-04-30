@@ -18,11 +18,18 @@ class Komik extends BaseController
     // page yang aktif
     $currentPage = $this->request->getVar('page_komik') ? $this->request->getVar('page_komik') : 1;
 
+    $keyword = $this->request->getVar('keyword');
+    if($keyword) {
+      $komik = $this->komikModel->search($keyword);
+    } else {
+      $komik = $this->komikModel;
+    }
+
     // $komik = $this->komikModel->findAll();
     $data = [
       'title'       => 'Daftar Komik',
       // 'komik' => $this->komikModel->getKomik()
-      'komik'       => $this->komikModel->paginate(3, 'komik'),    // set jumlah data yang ditampilkan per page (per halaman)
+      'komik'       => $komik->paginate(5, 'komik'),    // set jumlah data yang ditampilkan per page (per halaman)
       'pager'       => $this->komikModel->pager,
       'currentPage' => $currentPage
     ];

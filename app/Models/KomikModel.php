@@ -20,4 +20,12 @@ class KomikModel extends Model
     return $this->where(['slug' => $slug])->first();
   }
 
+  public function search($keyword)
+  {
+    $builder = $this->table('komik');
+    $builder->like('judul', $keyword);
+    
+    return $builder;
+  }
+
 }

@@ -4,9 +4,19 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-4">
       <a href="/komik/create" class="btn btn-primary mt-3">Tambah Data Komik</a>
       <h1 class="my-3">Daftar Komik</h1>
+      <form action="" method="POST">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Masukkan judul komik" name="keyword">
+          <button class="btn btn-outline-secondary" type="submit" name="submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <?php if(session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
           <?= session()->getFlashdata('pesan'); ?>
@@ -22,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <?php $i = 1 + (3 * ($currentPage - 1)); ?>
+          <?php $i = 1 + (5 * ($currentPage - 1)); ?>
           <?php foreach($komik as $k) : ?>
             <tr>
               <th scope="row"><?= $i++; ?></th>

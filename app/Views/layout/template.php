@@ -30,5 +30,19 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
   -->
+
+  <script>
+    function imagePreview() {
+      const sampul = document.querySelector('#sampul')
+      const imgPreview = document.querySelector('.img-preview')
+      const fileSampul = new FileReader()
+      
+      fileSampul.readAsDataURL(sampul.files[0])
+      fileSampul.onload = function(e) {
+        imgPreview.src = e.target.result;
+      }
+    }
+  </script>
+
   </body>
 </html>

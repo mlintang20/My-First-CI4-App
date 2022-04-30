@@ -7,7 +7,7 @@
     <div class="col-8">
       <h1 class="my-3">Form Tambah Data Komik</h1>
 
-      <form action="/komik/save" method="POST">
+      <form action="/komik/save" method="POST" enctype="multipart/form-data">
         <?= csrf_field(); ?>
         <div class="row mb-3">
           <label for="judul" class="col-sm-2 col-form-label">Judul</label>
@@ -32,8 +32,17 @@
         </div>
         <div class="row mb-3">
           <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="sampul" name="sampul" value="<?= old('sampul'); ?>">
+          <div class="col-sm-2">
+            <img src="/img/default.png" class="img-thumbnail img-preview">
+          </div>
+          <div class="col-sm-8">
+            <div class="input-group">
+              <input type="file" class="form-control <?= ($validation->hasError('sampul')) ? 'is-invalid' : ''; ?>" id="sampul" name="sampul" onchange="imagePreview()" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+              <div class="invalid-feedback">
+                <?= $validation->getError('sampul'); ?>
+              </div>
+              <label for="sampul"></label>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Tambah</button>
